@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prime Factor Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>Prime Factor Visualizer</h1>
+      <p class="subtitle"></p>
+    </header>
+
+    <main class="main">
+      <section class="inputPanel card">
+        <label for="num">Enter a positive integer</label>
+        <div class="row">
+          <input id="num" type="number" min="2" placeholder="e.g. 33957" />
+          <button id="run">Factorize</button>
+        </div>
+
+        <div class="controls">
+          <label><input id="animateToggle" type="checkbox" checked /> Animate steps</label>
+          <label><input id="showDivisors" type="checkbox" /> Show all divisors</label>
+          <button id="generateExampleBtn" class="btn-secondary">Try an example</button>
+        </div>
+
+        <div id="message" class="message"></div>
+      </section>
+
+      <section class="visuals">
+        <div class="card longDivCard">
+          <h2>Long-division Steps</h2>
+          <div id="longSteps" class="longSteps"></div>
+          <div class="finalFactors" id="finalFactors"></div>
+        </div>
+
+        <div class="card treeCard">
+          <h2>Factor Tree</h2>
+          <div class="svgWrap" id="svgWrap">
+            <svg id="treeSvg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin meet"></svg>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small></small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
