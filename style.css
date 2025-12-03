@@ -232,3 +232,97 @@ svg{
   .visuals{grid-template-columns:1fr}
   svg{height:420px}
 }
+
+/* --- TUTORIAL CHAT STYLES --- */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  max-height: 600px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto; /* Center the chat container */
+  overflow: hidden; /* To contain the border-radius */
+}
+
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(0,0,0,0.15);
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: 85%;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.message-bubble {
+  padding: 10px 15px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #4b5563;
+  color: #9ca3af;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bot-message {
+  align-self: flex-start;
+}
+
+.bot-message .message-bubble {
+  background-color: #3b82f6;
+  color: #fff;
+  border-bottom-left-radius: 5px;
+}
+
+.user-message {
+  align-self: flex-end;
+}
+
+.user-message .message-bubble {
+  background-color: #4b5563;
+  color: #e5e7eb;
+  border-bottom-right-radius: 5px;
+}
+
+.user-actions {
+  padding: 15px;
+  border-top: 1px solid var(--glass);
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.back-button {
+  display: block;
+  width: fit-content;
+  margin: 20px auto 0;
+}
