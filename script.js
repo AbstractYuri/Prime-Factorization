@@ -1,6 +1,7 @@
 // ---------- Prime & Factor Helpers ----------
 function isPrime(n) {
   if (n <= 1) return false;
+  if (n <= 1) return false; 
   if (n <= 3) return true;
   if (n % 2 === 0) return false;
   const L = Math.floor(Math.sqrt(n));
@@ -106,6 +107,23 @@ const showDivisors = document.getElementById("showDivisors");
 const treeSvg = document.getElementById("treeSvg");
 const messageEl = document.getElementById("message");
 const generateExampleBtn = document.getElementById("generateExampleBtn");
+const showTutorialBtn = document.getElementById("showTutorialBtn");
+const MAIN_STORAGE_KEY = 'prime-visualizer-state';
+
+showTutorialBtn.onclick = () => {
+  const num = input.value.trim();
+  // Save the current number before navigating away
+  localStorage.setItem(MAIN_STORAGE_KEY, JSON.stringify({ number: num }));
+
+  if (num && Number.isInteger(Number(num)) && Number(num) >= 2) {
+    window.location.href = `tutorial.html?number=${num}`;
+  } else {
+    // If no valid number, still save an empty state so we don't
+    // load an old number when we come back.
+    localStorage.setItem(MAIN_STORAGE_KEY, JSON.stringify({ number: '' }));
+    window.location.href = 'tutorial.html';
+  }
+};
 
 runBtn.onclick = () => {
   const raw = input.value.trim();
@@ -113,6 +131,9 @@ runBtn.onclick = () => {
   longStepsEl.innerHTML = "";
   finalFactorsEl.innerHTML = "";
   clearSvg();
+
+  // Save state on run
+  localStorage.setItem(MAIN_STORAGE_KEY, JSON.stringify({ number: raw }));
 
   const n = Number(raw);
   if (!raw || !Number.isInteger(n) || n < 2) {
@@ -277,3 +298,19 @@ function drawNode(n,cx,cy,idx){
     g.style.opacity=1;
   }, idx*STEP_DELAY);
 }
+
+// ---------- Page Load ----------
+function restoreMainState() {
+  try {
+    const savedState = localStorage.getItem(MAIN_STORAGE_KEY);
+    if (savedState) {
+      const state = JSON.parse(savedState);
+      if (state.number) {
+        input.value = state.number;
+        runBtn.click();
+      }
+    }
+  } catch (e) { console.error("Failed to restore state:", e); }
+}
+
+document.addEventListener('DOMContentLoaded', restoreMainState);
